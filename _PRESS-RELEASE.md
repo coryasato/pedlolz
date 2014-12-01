@@ -19,26 +19,45 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
+  A virtual guitar pedal generator.  Pedlolz.
+
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+
+  Live guitar effects in your internet browser.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
+  Pedlolz, the open source virtual guitar effects suite for your internet browser.  Customize your own pedal, load your own pre-recorded songs or with Chrome Canary plug in and play live!  Using the latest Web Audio technology, Pedlolz offers a range of guitar effects for your much needed jam session on the go.
+
 ## Problem ##
   > Describe the problem your product solves.
+
+  Gear is expensive and bulky.  Ever wonder how that guitar part sounds with a delay?  Create one with Pedlolz and get spacey with it David Gilmour.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
 
+  Using the latest Web Audio Technology, Pedlolz gives the user the ability to create and play guitar effects live in their browser.
+
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+
+  "Let your sonic creativity loose."
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
 
+  Head over to Pedlolz.io, sign in with your Google account, plug in and start shredding!
+
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
+  "For the pedal obsessed "Gear Pager" to the pedal-less guitarist seeking to experiement with new sounds, Pedlolz is a fun and useful open source solution.  Easy enough for the old blooze hound to the teenage bedroom rocker."
+
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+  For a full demo head to our site at: http://pedlolz.io
+  For deeper instructions on our effects, head to our README: http://pedlolz.io/more-tones
