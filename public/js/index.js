@@ -68,16 +68,15 @@ var PedalList = React.createClass({
   render: function() {
     var that = this;
     return(
-      <ul>
+      <ul className="pedal-menu">
         {this.state.pedals.map(function(pedal) {
-          return <li className="pedal-menu" key={pedal.class}>
+          return <li className="pedal-list" key={pedal.class}>
             <a href="javascript:void(0)" onClick={that.showPedal.bind(that, pedal.class)} 
               className={pedal.classString} data-name={pedal.class}>{pedal.name}
             <div className="ripple-wrapper"></div>
             </a>
-            </li>
-        })
-      }
+          </li>
+        })}
       </ul>
     );
   }
@@ -85,72 +84,122 @@ var PedalList = React.createClass({
 
 React.render(<PedalList />, document.getElementById('pedalList'));
 
+/**
+ * Control Panel
+ */
+
+var ControlPanel = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <ControlButton />
+        <SongList />
+      </div>
+    );
+  }
+});
+
+/**
+ * Control Button
+ */
+
+var ControlButton = React.createClass({
+  getInitialState: function() {
+    return { icon: 'mdi-av-play-arrow', state: false }
+  },
+
+  buttonHandler: function() {
+    this.state.state = !this.state.state;
+    if(this.state.state) {
+      this.setState({icon: 'mdi-av-stop'})
+      stage.play();
+    } else {
+      this.setState({icon: 'mdi-av-play-arrow'})
+      stage.stop();
+    }
+  },
+
+  render: function() {
+    return (
+      <div id="controlButton"><span onClick={this.buttonHandler} className={this.state.icon}></span></div>
+    );
+  }
+});
+
+/**
+ * Song List
+ */
+
+var SongList = React.createClass({
+  getInitialState: function() {
+    return {
+      songs: [{'name': 'Sabbath Bloody Sabbath', 'path': 'assets/samples/bloody_sabbath.mp3'}, 
+              {'name':'Going To California', 'path': 'assets/samples/going_to_california.mp3'}]
+    };
+  },
+
+  playSong: function(path) {
+    state = true;
+    cBDraw();
+    stage.play(path);
+  },
+
+  render: function() {
+    var that = this;
+    return(
+      <div className='samples'>
+        {this.state.songs.map(function(song) {
+          return <div className='sample' key={song.name} onClick={that.playSong.bind(that, song.path)}>{song.name}</div>
+        })}
+      </div>
+    );
+  }
+});
+
+React.render(<ControlPanel />, document.getElementById('controlPanel'));
+
+
+/************* LINE IN && OLD CODE *****************/
 
 /**
  * Sample Controls
  */
-var state = false;
-var cb = document.getElementById('controlButton');
-var samples = document.getElementsByClassName('sample');
-var lb = document.getElementsByClassName('linein')[0];
-var sampleNo = 1;
-var settings = [];
 
-samples = Array.prototype.slice.call(samples);
+// var state = false;
+// var controlBtn = document.getElementById('controlButton');
+// var line = document.getElementsByClassName('linein')[0];
+// var settings = [];
+// var samples = document.getElementsByClassName('sample');
+// var sampleNo = 1;
 
-var playLineIn = function() {
-  stage.stop();
-  stage.input = new pb.io.StreamInput(stage.getContext());
-  stage.input.addEventListener('loaded', function() {
-      stage.route();
-  });
-};
+// /**
+//  * LineIn Functions *** TODO | TAKING OUT FOR DEMO ***
+//  */
 
-lb.addEventListener('click', function() {
-  state = true;
-  sampleNo = 6;
-  cBDraw();
-  settings[sampleNo - 1]();
-  playLineIn();
-}, false);
+// var playLineIn = function() {
+//   stage.stop();
+//   stage.input = new pb.io.StreamInput(stage.getContext());
+//   stage.input.addEventListener('loaded', function() {
+//       stage.route();
+//   });
+// };
 
-var cBDraw = function() {
-  cb.innerHTML = state ? '&#9724;' : '&#9654;';
-  samples.forEach(function(sample) {
-      sample.className = 'sample';
-  });
-  samples[sampleNo - 1] && (samples[sampleNo - 1].className = 'sample on');
+// line.addEventListener('click', function() {
+//   state = true;
+//   sampleNo = 6;
+//   cBDraw();
+//   //settings[sampleNo - 1]();
+//   playLineIn();
+// }, false);
 
-  sampleNo === 6 ? lb.className = 'linein on' : lb.className = 'linein';
-};
-
-var play = function() {
-  // Check for line in
-  if (sampleNo == 6) {
-      playLineIn();
-      return;
-  }
-  settings[sampleNo - 1] && settings[sampleNo - 1]();
-  stage.play('assets/samples/bloody_sabbath.mp3');
-};
-
-var cBHandler = function() {
-    state = !state;
-    cBDraw();
-    stage.stop();
-    if (state) play();
-};
-
-cb.addEventListener('click', cBHandler, false);
-
-samples.forEach(function(sample) {
-  sample.addEventListener('click', function() {
-      sampleNo = Array.prototype.slice.call(sample.parentNode.children).indexOf(sample) + 1;
-      state = true;
-      cBDraw();
-      play();
-  });
-});
+// var play = function() {
+//   if (sampleNo == 6) {
+//       playLineIn();
+//       return;
+//   }
+//   // settings[sampleNo - 1] && settings[sampleNo - 1]();
+//   stage.play();
+// };
 
 // settings.push(function() {
 //   !overdrive.bypassSwitch.getState() && overdrive.bypassSwitch.toggle();

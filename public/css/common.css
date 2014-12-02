@@ -24,7 +24,7 @@ footer {
 }
 
 #controlPanel {
-    z-index: 1; position: absolute; width: 100%; text-align: center; bottom: 30vh;
+    z-index: 1; position: absolute; width: 100%; text-align: center; bottom: 20vh;
 
     -webkit-transform: translateZ(10px);
     -moz-transform: translateZ(10px);
@@ -110,10 +110,10 @@ footer {
         url('../img/bluelights.jpg');
 }
 
-#controlButton { cursor: pointer; font-size: 6vh; color: rgba(255,255,255,0.6); }
+#controlButton { cursor: pointer; font-size: 10vh; color: rgba(255,255,255,0.6); }
 #controlButton:hover { color: rgba(255,255,255,0.8); }
 
-.sample, .linein { display: inline-block; font-family: Radley; font-size: 30px; margin: 0 1vh; cursor: pointer; color: rgba(255,255,255,0.6); }
+.sample, .linein { display: block; padding: 5px; font-family: Radley; font-size: 30px; margin: 0 1vh; cursor: pointer; color: rgba(255,255,255,0.6); }
 .sample:hover { color: rgba(255,255,255,0.8); }
 .sample.on { color: rgba(255,255,255,0.9); }
 
@@ -135,6 +135,10 @@ footer {
 }
 
 .pedal-menu {
+    z-index: 90;
+}
+
+.pedal-list {
     float: left;
     height: 65px;
     padding: 5px;
