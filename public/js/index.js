@@ -10,7 +10,7 @@ var reverb = new pb.stomp.Reverb(ctx);
 var volume = new pb.stomp.Volume(ctx);
 var cabinet = new pb.stomp.Cabinet(ctx);
 var delay = new pb.stomp.Delay(ctx);
-// var pedalsToAdd = [];
+
 var availablePedals = {
   'overdrive': overdrive,
   'delay': delay,
@@ -18,11 +18,11 @@ var availablePedals = {
   'cabinet': cabinet,
   'volume': volume
 };
-//board.addPedals();
 
 /**
  * Start Board
  */
+
 stage.render(document.getElementById('floor'));
 stage.setBoard(board);
 
@@ -35,10 +35,10 @@ var PedalList = React.createClass({
     return {
       pedals: [
         {'name': 'OD', 'class': 'overdrive', 'classString': 'btn btn-success btn-fab btn-raised'},
-        {'name': 'DL', 'class': 'delay', 'classString': 'btn btn-warning btn-fab'},
-        {'name': 'RV', 'class': 'reverb', 'classString': 'btn btn-info btn-fab'},
-        {'name': 'CA', 'class': 'cabinet', 'classString': 'btn btn-primary btn-fab'},
-        {'name': 'VL', 'class': 'volume', 'classString': 'btn btn-danger btn-fab'}
+        {'name': 'DL', 'class': 'delay', 'classString': 'btn btn-material-grey btn-fab btn-raised'},
+        {'name': 'RV', 'class': 'reverb', 'classString': 'btn btn-info btn-fab btn-raised'},
+        {'name': 'CA', 'class': 'cabinet', 'classString': 'btn btn-material-purple btn-fab btn-raised'},
+        {'name': 'VL', 'class': 'volume', 'classString': 'btn btn-material-lightyellow btn-fab btn-raised'}
       ]
     };
   },
@@ -70,7 +70,12 @@ var PedalList = React.createClass({
     return(
       <ul>
         {this.state.pedals.map(function(pedal) {
-          return <li className="pedal-menu" key={pedal.class}><a href="javascript:void(0)" onClick={that.showPedal.bind(that, pedal.class)} className={pedal.classString} data-name={pedal.class}>{pedal.name}</a></li>
+          return <li className="pedal-menu" key={pedal.class}>
+            <a href="javascript:void(0)" onClick={that.showPedal.bind(that, pedal.class)} 
+              className={pedal.classString} data-name={pedal.class}>{pedal.name}
+            <div className="ripple-wrapper"></div>
+            </a>
+            </li>
         })
       }
       </ul>
@@ -80,22 +85,6 @@ var PedalList = React.createClass({
 
 React.render(<PedalList />, document.getElementById('pedalList'));
 
-var PedalBoard = React.createClass({
-  getInitialState: function() {
-    return { message: 'No Stairway To Heaven'};
-  },
-  handleClick: function() {
-    this.setState({message: ''});
-  },
-  render: function() {
-    return (<div className='loadMessage' onClick={this.handleClick}>{this.state.message}</div>);
-  }
-});
-
-React.render(
-  <PedalBoard />,
-  document.getElementById('reactClick')
-);
 
 /**
  * Sample Controls
