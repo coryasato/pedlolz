@@ -5,6 +5,7 @@ var board = new pb.Board(ctx);
 /**
  * Create Effect Types
  */
+
 var overdrive = new pb.stomp.Overdrive(ctx);
 var reverb = new pb.stomp.Reverb(ctx);
 var volume = new pb.stomp.Volume(ctx);
@@ -18,6 +19,8 @@ var availablePedals = {
   'cabinet': cabinet,
   'volume': volume
 };
+
+var queue = '';
 
 /**
  * Start Board
@@ -72,8 +75,7 @@ var PedalList = React.createClass({
         {this.state.pedals.map(function(pedal) {
           return <li className="pedal-list" key={pedal.class}>
             <a href="javascript:void(0)" onClick={that.showPedal.bind(that, pedal.class)} 
-              className={pedal.classString} data-name={pedal.class}>{pedal.name}
-            <div className="ripple-wrapper"></div>
+              className={pedal.classString} data-name={pedal.class}><div className="ripple-wrapper"></div>{pedal.name}
             </a>
           </li>
         })}
@@ -111,10 +113,10 @@ var ControlButton = React.createClass({
   buttonHandler: function() {
     this.state.state = !this.state.state;
     if(this.state.state) {
-      this.setState({icon: 'mdi-av-stop'})
-      stage.play();
+      this.setState({icon: 'mdi-av-stop'});
+      stage.play(queue);
     } else {
-      this.setState({icon: 'mdi-av-play-arrow'})
+      this.setState({icon: 'mdi-av-play-arrow'});
       stage.stop();
     }
   },
@@ -138,18 +140,21 @@ var SongList = React.createClass({
     };
   },
 
-  playSong: function(path) {
-    state = true;
-    cBDraw();
-    stage.play(path);
+  queueSong: function(path) {
+    queue = path;
   },
 
   render: function() {
     var that = this;
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'sample': true
+    });
+
     return(
       <div className='samples'>
         {this.state.songs.map(function(song) {
-          return <div className='sample' key={song.name} onClick={that.playSong.bind(that, song.path)}>{song.name}</div>
+          return <div className={classes} key={song.name} onClick={that.queueSong.bind(that, song.path)}>{song.name}</div>
         })}
       </div>
     );
