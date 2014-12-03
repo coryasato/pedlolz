@@ -2,6 +2,10 @@ var stage = new pb.Stage();
 var ctx = stage.getContext();
 var board = new pb.Board(ctx);
 
+pb.Board.prototype.templates_empty = function() {
+    return '<div class="empty"><div class="text pedlolz">PEDLOLZ</div></div>';
+};
+
 /**
  * Create Effect Types
  */
