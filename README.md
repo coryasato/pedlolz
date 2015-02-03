@@ -1,2 +1,3 @@
-#solo
-This is a project I completed as a student at [Hack Reactor](http://hackreactor.com). This project was worked on with a pair.
+#Pedlolz
+
+Guitar pedal emulator using pedalboard.js and written in React.js.  This was a Hackathon project completed in about 10-12 hours.
